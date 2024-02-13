@@ -45,7 +45,7 @@ for i in $(cat ${input_list}); do
 
 mkdir -p ${output_path}/${id}/${visit}/dwi
 mkdir -p ${output_path}/${id}/${visit}/dti
-
+mkdir -p ${output_path}/${id}/${visit}/dti_in_ICBM
 ### Extract WM from mask ###
 fslmath ${mask} -thr 7.9 -uthr 8.1 -bin ${output_path}/${id}/${visit}/dwi/WM_mask_bin.nii.gz 
 itk_resample --like ${b0_pe} --labels ${output_path}/${id}/${visit}/dwi/WM_mask_bin.nii.gz ${output_path}/${id}/${visit}/dwi/WM_mask_bin_resampled.nii.gz
@@ -79,4 +79,10 @@ dwi2tensor -mask ${wm_mask} ${output_path}/${id}/${visit}/dwi/${id}_${visit}_dwi
 
 ### Compute tensor metrics ###
 tensor2metric -mask ${wm_mask} -fa ${output_path}/${id}/${visit}/dti/${id}_${visit}_fa.nii -adc ${output_path}/${id}/${visit}/dti/${id}_${visit}_md.nii -rd ${output_path}/${id}/${visit}/dti/${id}_${visit}_rd.nii -ad ${output_path}/${id}/${visit}/dti/${id}_${visit}_ad.nii ${output_path}/${id}/${visit}/dti/${id}_${visit}_dwi_concat_den_unr_preproc_unb_DTensor.mif
+
+
+
+
+### Transorm to ICBM ###
+itk_resample ${output_path}/${id}/${visit}/dti/${id}_${visit}_fa.nii ${output_path}/${id}/${visit}/dti_in_ICBM${id}_${visit}_fa.nii /data/dadmah/ex_vivo_DBCBB_Data/BISON_DWI/${id}_${visit}.xfm 
 
