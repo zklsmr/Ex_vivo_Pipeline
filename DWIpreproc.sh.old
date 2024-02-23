@@ -111,31 +111,30 @@ for sub_mask in "$src_mask"/*; do
 							-eddy_options "--slm=linear"
 
 
-						dwibiascorrect fsl "${previous_DTI}${sub_id}/fslpreproc_data/${new_basename}_concat_denoised_unrang_preproc.mif" "${previous_DTI}${sub_id}/unbias_data/${new_basename}_concat_denoised_unrang_preproc_unbiased.mif" \
-							-bias "${previous_DTI}${sub_id}/unbias_data/${new_basename}_concat_denoised_unrang_preproc_bias.mif" \
-							-mask "${my_src_raw}${sub_id}/${sub_mask%.*}_wholebrain_mask_resampled.nii.gz"
+			dwibiascorrect fsl "${previous_DTI}${sub_id}/fslpreproc_data/${new_basename}_concat_denoised_unrang_preproc.mif" "${previous_DTI}${sub_id}/unbias_data/${new_basename}_concat_denoised_unrang_preproc_unbiased.mif" \
+				-bias "${previous_DTI}${sub_id}/unbias_data/${new_basename}_concat_denoised_unrang_preproc_bias.mif" \
+				-mask "${my_src_raw}${sub_id}/${sub_mask%.*}_wholebrain_mask_resampled.nii.gz"
 
-						dwi2tensor -mask "${my_src_raw}${sub_id}/${sub_mask%.*}_wholebrain_mask_resampled.nii.gz" \
-							"${previous_DTI}${sub_id}/unbias_data/${new_basename}_concat_denoised_unrang_preproc_unbiased.mif" \
-							"${previous_DTI}${sub_id}/tensor_data/${new_basename}_concat_denoised_unrang_preproc_unbiased_DTI.nii"
+			dwi2tensor -mask "${my_src_raw}${sub_id}/${sub_mask%.*}_wholebrain_mask_resampled.nii.gz" \
+				"${previous_DTI}${sub_id}/unbias_data/${new_basename}_concat_denoised_unrang_preproc_unbiased.mif" \
+				"${previous_DTI}${sub_id}/tensor_data/${new_basename}_concat_denoised_unrang_preproc_unbiased_DTI.nii"
 
-						tensor2metric -mask "${my_src_raw}${sub_id}/${sub_mask%.*}_wholebrain_mask_resampled.nii.gz" \
-							-fa "${previous_DTI}${sub_id}/tensor_data/${new_basename}_concat_denoised_unrang_preproc_unbiased_DTI_FA.nii" \
-							-ad "${previous_DTI}${sub_id}/tensor_data/${new_basename}_concat_denoised_unrang_preproc_unbiased_DTI_AD.nii" \
-							-rd "${previous_DTI}${sub_id}/tensor_data/${new_basename}_concat_denoised_unrang_preproc_unbiased_DTI_RD.nii" \
-							-adc "${previous_DTI}${sub_id}/tensor_data/${new_basename}_concat_denoised_unrang_preproc_unbiased_DTI_MD.nii" \
-							"${previous_DTI}${sub_id}/tensor_data/${new_basename}_concat_denoised_unrang_preproc_unbiased_DTI.nii"
+			tensor2metric -mask "${my_src_raw}${sub_id}/${sub_mask%.*}_wholebrain_mask_resampled.nii.gz" \
+				-fa "${previous_DTI}${sub_id}/tensor_data/${new_basename}_concat_denoised_unrang_preproc_unbiased_DTI_FA.nii" \
+				-ad "${previous_DTI}${sub_id}/tensor_data/${new_basename}_concat_denoised_unrang_preproc_unbiased_DTI_AD.nii" \
+				-rd "${previous_DTI}${sub_id}/tensor_data/${new_basename}_concat_denoised_unrang_preproc_unbiased_DTI_RD.nii" \
+				-adc "${previous_DTI}${sub_id}/tensor_data/${new_basename}_concat_denoised_unrang_preproc_unbiased_DTI_MD.nii" \
+				"${previous_DTI}${sub_id}/tensor_data/${new_basename}_concat_denoised_unrang_preproc_unbiased_DTI.nii"
 
-						echo -e "\n-=-=-=--=-=-=--=-=-=--=-=-=--=-=-=--=-=-=--=-=-=--=-=-=-"
-						echo "Finished DTI metric extraction"
-						echo -e "\n-=-=-=--=-=-=--=-=-=--=-=-=--=-=-=--=-=-=--=-=-=--=-=-=-"
-         
+			echo -e "\n-=-=-=--=-=-=--=-=-=--=-=-=--=-=-=--=-=-=--=-=-=--=-=-=-"
+			echo "Finished DTI metric extraction"
+			echo -e "\n-=-=-=--=-=-=--=-=-=--=-=-=--=-=-=--=-=-=--=-=-=--=-=-=-"
+
 						
 
-					fi
-				else
-					echo "Subject ${sub_id} Does not have DWI data"
-				fi
+			fi
+			else
+				echo "Subject ${sub_id} Does not have DWI data"
 			fi
 		fi
 		echo -e "\n============================================================================================"
