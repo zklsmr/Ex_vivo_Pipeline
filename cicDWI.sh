@@ -1,6 +1,6 @@
 #! /bin/bash
 
-# zklsmr
+# Zaki Alasmar @zklsmr - December 2023
 # to preprocess CIC ex-vivo DWI, 30 dir 3T protocol
 #
 if [ $# -eq 2 ]; then
