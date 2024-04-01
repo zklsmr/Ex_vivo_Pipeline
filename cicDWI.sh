@@ -28,6 +28,7 @@ fi
 
 
 
+
 ### Pr-processing the native data ###
 for i in $(cat ${input_list}); do 
   id=$(echo ${i}|cut -d , -f 1)
@@ -84,5 +85,5 @@ tensor2metric -mask ${wm_mask} -fa ${output_path}/${id}/${visit}/dti/${id}_${vis
 
 
 ### Transorm to ICBM ###
-itk_resample ${output_path}/${id}/${visit}/dti/${id}_${visit}_fa.nii ${output_path}/${id}/${visit}/dti_in_ICBM${id}_${visit}_fa.nii /data/dadmah/ex_vivo_DBCBB_Data/BISON_DWI/${id}_${visit}.xfm 
+#itk_resample ${output_path}/${id}/${visit}/dti/${id}_${visit}_fa.nii ${output_path}/${id}/${visit}/dti_in_ICBM${id}_${visit}_fa.nii /data/dadmah/ex_vivo_DBCBB_Data/BISON_DWI/${id}_${visit}.xfm 
 
